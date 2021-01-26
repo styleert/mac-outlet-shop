@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <title>MacOutlet</title>
 </head>
-<body>
+<body class="body">
     <div class="wrapper">
         <header class="header">
             <div class="logo"><img src="img/icons/image 1.svg" alt="alt"></div>
@@ -19,7 +19,7 @@
         </header>
     </div>
     <div class="wrapper">
-    <main class="main">
+    <main>
         <div class="slider">
               <div class="slider-item" style="background-image: url(img/banners/ipad_air_banner.jpg);">
                 <div class="slider-header-cnt flex-column-center">
@@ -31,9 +31,9 @@
                         <h1 class="slider-header">AirPods Pro</h1>
                         <button class="button">Add to cart</button>
                     </div></div>
-              <div class="slider-item" style="background-image: url(img/banners/watch_banner.jpg);">
+              <div class="slider-item" style="background-image: url(img/banners/watch_banner.jpg)">
                 <div class="slider-header-cnt flex-column-center">
-                    <h1 class="slider-header">Apple Watch 4</h1>
+                    <h1 class="slider-header" style="color:#f54e42;">Apple Watch 4</h1>
                     <button class="button">Add to cart</button>
                 </div></div>
               <div class="slider-item" style="background-image: url(img/banners/iphone_12_banner.jpg);">
@@ -272,6 +272,63 @@
 
 
             <div id="shop-grid-cnt" class="shop-grid-cnt"></div>
+        </div>
+        <div id="pop-up" class="pop-up-cnt">
+            <div class="pop-up-bg" onclick="hideItemPopUp()">
+            </div>
+            <div class="pop-up-card wrapper">
+                <div class="pop-up-card-section pop-up-flex-section">
+                    <img id="pop-up-img" src="./img/items/apple-tv.jpeg" alt="" class="pop-up-image">
+                </div>
+                <div class="pop-up-card-section pop-up-description-cnt">
+                    <h5 id="pop-up-prod-title" class="shop-item-title shop-item-cnt">Apple TV Gen. 4 2020</h5>
+                    <div class="item-stat flex-column-center pop-up-description">
+                        <div class="stat-wrapper stat-wrapper-left">
+                            <span id="pop-up-prod-reviews" class="shop-item-cnt"><b>77%</b> Positive reviews</span>
+                            <span>Above avarage</span>
+                        </div>
+                        <div class="stat-wrapper stat-wrapper-right">
+                            <span id="pop-up-prod-orders" class="shop-item-cnt"><b>527</b></span>
+                            <span>orders</span>
+                        </div>
+                    </div>
+                    <ul id="pop-up-prod-list">
+                        <li class="pop-up-item-description">
+                            <span  class="pop-up-item-title">Color: </span>
+                            <span id="pop-up-prod-color" class="pop-up-item-value">Black</span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Operating system:</span>
+                            <span id="pop-up-prod-os" class="pop-up-item-value">Black</span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Chip:</span>
+                            <span id="pop-up-prod-chip" class="pop-up-item-value">Black</span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Height:</span>
+                            <span id="pop-up-prod-height" class="pop-up-item-value">Black</span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Width:</span>
+                            <span id="pop-up-prod-width" class="pop-up-item-value">Black</span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Weight:</span>
+                            <span id="pop-up-prod-weight" class="pop-up-item-value">Black</span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Depth:</span>
+                            <span id="pop-up-prod-depth" class="pop-up-item-value">Black</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pop-up-card-section pop-up-flex-section" style="flex-direction: column;">
+                    <span id="pop-up-prod-price" class="pop-up-card-price">$999,45</span>
+                    <span id="pop-up-prod-stock"  class="pop-up-stock">Stock: <b>45</b>pcs.</span>
+                    <button class="button" onclick="addToCart()">Add to cart</button>
+                </div>
+            </div>
         </div>
     </main>
 </div>

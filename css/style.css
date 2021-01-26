@@ -1,3 +1,7 @@
+.body {
+  position: relative;
+}
+
 .wrapper {
   max-width: 1024px;
   margin: 0 auto;
@@ -148,6 +152,7 @@
 
 .shop-item-inner {
   padding: 15px 50px;
+  height: 382px;
 }
 
 .item-img {
@@ -340,4 +345,97 @@
 
 .filter-list > :not(:last-child) {
   margin-bottom: 15px;
+}
+
+/* POP UP */
+.pop-up-cnt {
+  /* changes value from JS none -> flex*/
+  display: none;
+
+  /*background-color: rgba(0, 0, 0, 0.8);*/
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  align-items: center;
+}
+
+.pop-up-bg {
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  z-index: 1;
+}
+
+.pop-up-card {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  border: 1px solid #C4C4C4;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+}
+
+.pop-up-card .pop-up-card-section:not(:last-child) {
+  border-right: 1px solid #C4C4C4;
+}
+
+.pop-up-card-section {
+  padding: 30px 60px;
+}
+
+.pop-up-flex-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pop-up-image {
+  width: 250px;
+  height: 250px;
+}
+
+.pop-up-description-cnt {
+  width: 100%;
+}
+
+.pop-up-description {
+  border-radius: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pop-up-item-description {
+  margin-bottom: 15px;
+}
+
+.pop-up-item-title {
+  font-size: 15px;
+  font-weight: 400;
+  color: #3d3d3d;
+}
+
+.pop-up-item-value {
+  font-size: 15px;
+  font-weight: 400;
+  color: #000;
+}
+
+.pop-up-card-price {
+  font-size: 35px;
+  font-weight: 600;
+  color: #000;
+}
+
+.pop-up-stock {
+  font-size: 20px;
+  color: #000;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
