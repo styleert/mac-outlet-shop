@@ -69,11 +69,11 @@
                     <div id="price-filter-item" class="filter-header filter-content">
                         <div class="filter-item">
                             <label class="filter-header-title filter-input-label">From</label>
-                            <input class="filter-input" type="text">
+                            <input id="from-range-filter" class="filter-input" type="text" onchange="inputOnChange('from', this)" value="300">
                         </div>
                         <div class="filter-item">
                             <label class="filter-header-title filter-input-label">To</label>
-                            <input class="filter-input" type="text">
+                            <input id="to-range-filter" class="filter-input" type="text" onchange="inputOnChange('to', this)" value="1000">
                         </div>
                     </div>
 
@@ -86,49 +86,49 @@
                         <ul class="two-col-list filter-list">
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Red">
                                     <label class="filter-header-title filter-input-label">Red</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Black">
                                     <label class="filter-header-title filter-input-label">Black</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Blue">
                                     <label class="filter-header-title filter-input-label">Blue</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Gold">
                                     <label class="filter-header-title filter-input-label">Gold</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Green">
                                     <label class="filter-header-title filter-input-label">Green</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="White">
                                     <label class="filter-header-title filter-input-label">White</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Grey">
                                     <label class="filter-header-title filter-input-label">Grey</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Yellow">
                                     <label class="filter-header-title filter-input-label">Yellow</label>
                                 </div>
                             </li>
@@ -202,25 +202,25 @@
                         <ul class="filter-list">
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('os', this)" value="IOS">
                                     <label class="filter-header-title filter-input-label">IOS</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('os', this)" value="macOS">
                                     <label class="filter-header-title filter-input-label">Mac OS</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('os', this)" value="tvOS">
                                     <label class="filter-header-title filter-input-label">tv OS</label>
                                 </div>
                             </li>
                             <li>
                                 <div class="filter-item">
-                                    <input class="filter-input filter-checkbox" type="checkbox">
+                                    <input id="watch-os" class="filter-input filter-checkbox" type="checkbox"  onchange="checkboxOnChange('os', this)" value="watchOS">
                                     <label class="filter-header-title filter-input-label">Watch OS</label>
                                 </div>
                             </li>
