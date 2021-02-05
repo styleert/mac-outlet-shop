@@ -498,7 +498,7 @@ const items = [
         category: 'Watch',
         imgUrl: 'items/apple-watch-series-6.png',
         name: 'Apple Watch Series 6',
-        display: 1.73228, // дюймы
+        display: 15, // дюймы
         color: [ 'Silver', 'Space Grey','Gold','Blue','Graphite'],
         price: 399, // доллары
         chip: {

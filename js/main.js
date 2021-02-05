@@ -112,6 +112,7 @@ $(document).ready(function () {
     });
 
     f = new Filter();
+    f.getFilterItemByKey('price').checkedValue = [179, 2799]
 
 
 
@@ -121,22 +122,60 @@ $(document).ready(function () {
     collapseOnClick('os-filter-item', 'os-header-item');
     collapseOnClick('display-filter-item', 'display-header-item');
 
+    let displayGroup = document.getElementById('display-filter-item').getElementsByClassName('filter-input');
+    console.log('display group', displayGroup);
 
 
     f.renderWithFilter(items);
 });
 
+const displayCheckboxOnClick = (e) => {
+    if (e.checked) {
 
+        let displayGroup = document.getElementById('display-filter-item').getElementsByClassName('filter-input');
+        for (let i = 0; i < displayGroup.length; i++) {
+            displayGroup[i].checked = false;
+        }
+        e.checked = true;
+
+        // filter display
+        let valuesRange = e.value.split(',');
+        f.getFilterItemByKey('display').checkedValue[0] = valuesRange[0];
+        f.getFilterItemByKey('display').checkedValue[1] = valuesRange[1];
+    } else {
+        e.checked = false;
+        f.getFilterItemByKey('display').removeCheckedValue(e.value);
+    }
+    f.renderWithFilter()
+
+}
+
+const memoryCheckboxOnClick = (e) => {
+    if (e.checked) {
+
+        let displayGroup = document.getElementById('memory-filter-item').getElementsByClassName('filter-input');
+        for (let i = 0; i < displayGroup.length; i++) {
+            displayGroup[i].checked = false;
+        }
+        e.checked = true;
+
+        let valuesRange = e.value.split(',');
+        f.getFilterItemByKey('storage').checkedValue[0] = valuesRange[0];
+        f.getFilterItemByKey('storage').checkedValue[1] = valuesRange[1];
+        console.log(f.getFilterItemByKey('storage').checkedValue)
+    } else {
+        e.checked = false;
+        f.getFilterItemByKey('storage').removeCheckedValue(e.value);
+    }
+
+    f.renderWithFilter()
+}
 
 const checkboxOnChange = (key, e) => {
-    // let filterName = filters[key];
     if (!e.checked) {
-        // const indexOfItem = filterName.indexOf(e.value);
-        // filterName.splice(indexOfItem);
-
         f.getFilterItemByKey(key).removeCheckedValue(e.value);
     } else {
-        // filterName.push(e.value);
+
 
         console.log('key', key);
         console.log('value', e.value);
@@ -145,6 +184,7 @@ const checkboxOnChange = (key, e) => {
         console.log('filter obj', f);
         console.log('filter item', f.getFilterItemByKey(key));
         f.getFilterItemByKey(key).addCheckedValue(e.value);
+
     }
 
 
@@ -164,30 +204,9 @@ const inputOnChange = (itemType, e) => {
     f.renderWithFilter();
 }
 
-// const renderProductItems = (items) => {
-//     items.forEach(function (item) {
-//         let shopItem = renderProductItem(item);
-//         $('#shop-grid-cnt').append(shopItem);
-//     })
-// }
-
-
-
-// const filterProducts = () => {
-//     const products = items.filter(item => {
-//         // filter os storage, display
-//         const osStorageDisplay = Object.keys(filters).every(f => filters[f].some(valToMatch => valToMatch === item[f]));
-//         const color = item.color.some(valToMatch => filters.color.includes(valToMatch))
-//
-//         return osStorageDisplay && color;
-//     });
-//     return products.length > 0 ? products : items;
-// }
-
 class FilterItem {
-    constructor(filterType, checkedValues=[]) {
+    constructor(checkedValues=[]) {
         this.checkedValue = checkedValues;
-        this.filterType = filterType
     }
 
     addCheckedValue(newValue) {
@@ -204,7 +223,6 @@ class FilterItem {
     }
 
     isWithCheckedItems() {
-        console.log('price filter', this.filterType, this.checkedValue.length, this.checkedValue);
         return this.checkedValue.length !== 0;
     }
 
@@ -216,8 +234,11 @@ class FilterItem {
 class Filter {
     constructor() {
         this.filterProps = {
-            price: new FilterItem("range"),
-            color: new FilterItem("array", [300, 1000]),
+            price: new FilterItem([179, 2799]),
+            color: new FilterItem(),
+            os: new FilterItem(),
+            storage: new FilterItem(),
+            display: new FilterItem(),
         }
     }
 
@@ -242,11 +263,9 @@ class Filter {
 
     filter() {
         let result;
-
         let from = this.getFilterItemByKey("price").getCheckedValueByIndex(0);
         let to = this.getFilterItemByKey("price").getCheckedValueByIndex(1);
         let isPriceValidated = this.validatePriceRanges(from, to);
-        // console.log(!isPriceValidated);
         if(!isPriceValidated) {
             return;
         }
@@ -254,13 +273,21 @@ class Filter {
        result = items.filter(item => {
            let isPrice = item["price"] >= from && item["price"] <= to;
            let isColor = this.getFilterItemByKey("color").isWithCheckedItems() ? item["color"].some(color => this.getFilterItemByKey("color").isItemIncludes(color)) : true;
-           console.log(this.filterProps, isPrice, isColor);
-           // filter os storage, display
-           // const osStorageDisplay = Object.keys(filters).every(f => filters[f].some(valToMatch => valToMatch === item[f]));
-           // const color = item.color.some(valToMatch => filters.color.includes(valToMatch))
+           let isOs = this.getFilterItemByKey("os").isWithCheckedItems() ? this.getFilterItemByKey("os").checkedValue.some(filterValue => item["os"] === filterValue) : true;
 
-            return !(isPrice && isColor);
-        });
+           let isStorage = this.getFilterItemByKey("storage").isWithCheckedItems() ? this.getFilterItemByKey("storage").checkedValue.some(filterValue => item["storage"] <= parseInt(filterValue)) : true;
+
+           let isDisplay = true;
+           if(this.getFilterItemByKey("display").isWithCheckedItems()) {
+               let filterValues = this.getFilterItemByKey("display").checkedValue;
+               let isFrom = item["display"] >= parseInt(filterValues[0]);
+               let isTo = filterValues[1] !== undefined ? item["display"] <= parseInt(filterValues[1]) : true;
+               console.log("isFrom", isFrom, "isTo", isTo, "from", filterValues[0], "to", filterValues[1]);
+               isDisplay =  isFrom && isTo;
+           }
+
+           return isPrice && isColor && isOs && isStorage && isDisplay;
+       });
 
        return result;
     }
@@ -270,7 +297,6 @@ class Filter {
     }
 
     renderProductItems(data) {
-        // todo: check data if is empty
         if(data === undefined) {
             document.getElementById('shop-grid-cnt').innerHTML = `<span class="error">Filter error. Change values!</span>`;
         } else {
@@ -283,225 +309,9 @@ class Filter {
 
     renderWithFilter() {
         document.getElementById('shop-grid-cnt').innerHTML = '';
-
-
-        let filteredItems;
+     let filteredItems;
         filteredItems = this.filter();
-        //
-        // if(this.isWithCheckedItems()) {
-        //     console.log('filter 1');
-        //     filteredItems = this.filter();
-        // } else {
-        //     console.log('filter 2');
-        //     filteredItems = items;
-        // }
         console.log( filteredItems);
         this.renderProductItems(filteredItems);
     }
 }
-
-
-
-// class Utils {
-//     constructor() {
-//         this.colors = this._getColors();
-//         this.categories = this._getCategory();
-//         this.priceRange = this._getPriceRange();
-//     }
-//
-//     _getColors(){
-//         const result = []
-//         items
-//             .forEach(item => {
-//                 result.push(...item.color)
-//             })
-//
-//         return result
-//             .filter((item, index, arr) => index == arr.indexOf(item))
-//     }
-//
-//     _getCategory(){
-//         return items
-//             .map(item => item.category)
-//             .filter((item, index, arr) => index == arr.indexOf(item))
-//     }
-//
-//     _getPriceRange(){
-//         const sortedByAsc = [...items]
-//             .sort((a, b) => a.price - b.price)
-//
-//         return {
-//             from: sortedByAsc[0].price,
-//             to: sortedByAsc[sortedByAsc.length - 1].price
-//         }
-//
-//     }
-// }
-//
-// const utils = new Utils();
-//
-// const cElem = (tName, cName, text) => {
-//   const elem = document.createElement(tName)
-//   elem.className = cName || '';
-//   elem.innerText = text || '';
-//   return elem;
-// }
-//
-// const renderItem = item => {
-//     const container = cElem('div', 'card');
-//     const img = cElem('img', 'card_img');
-//     img.src = `img/${item.imgUrl}`;
-//     const title = cElem('h6', 'card_title',item.name);
-//     const price = cElem('p', 'card_price', `${item.price} $`);
-//     container.append(img, title, price)
-//     return container;
-// }
-//
-// const renderCards = items => {
-//     const container = document.querySelector('.items');
-//     container.innerHTML = '';
-//     const elems = items.map(item => renderItem(item))
-//     container.append(...elems)
-// }
-//
-// renderCards(items)
-//
-// const renderWithFilters = (filtersArr) => {
-//     const filtredItems = items.filter(item => {
-//         const isPrice = item.price >= filtersArr[0].changes.from && item.price <= filtersArr[0].changes.to
-//         const isColors = !filtersArr[1].checked.length ||
-//             item.color.some(color => filtersArr[1].checked.includes(color))
-//         return isPrice && isColors;
-//     })
-//     renderCards(filtredItems);
-// }
-//
-// class Filter{
-//     constructor() {
-//         this.filterArr = [
-//             {
-//                 type: 'range',
-//                 title: 'Price',
-//                 variant: utils.priceRange,
-//                 changes: {...utils.priceRange}
-//             },
-//             {
-//                 type: 'check',
-//                 title: 'Colors',
-//                 variants: utils.colors,
-//                 checked: [],
-//             },
-//             {
-//                 type: 'check',
-//                 title: 'Categories',
-//                 variants: utils.categories,
-//                 checked: [],
-//             },
-//         ]
-//     }
-//
-//     changePrice = (type, price) => {
-//         this.filterArr[0].changes[type] = price;
-//         renderWithFilters(this.filterArr)
-//     }
-//
-//     changeColor = (colorName) => {
-//         const indexOfColorInFilter = this.filterArr[1].checked.indexOf(colorName)
-//         if (indexOfColorInFilter > -1) {
-//             this.filterArr[1].checked.splice(indexOfColorInFilter, 1)
-//         } else {
-//             this.filterArr[1].checked.push(colorName)
-//         }
-//         renderWithFilters(this.filterArr)
-//     }
-// }
-//
-// class RenderFilter extends Filter{
-//     constructor() {
-//         super();
-//         this.renderFilters();
-//     }
-//
-//     get contentRenderMethods() {
-//         return {
-//             check: this._renderContentCheck.bind(this),
-//             range: this._renderContentRange.bind(this),
-//         }
-//     }
-//
-//     renderFilters(){
-//         const container = document.querySelector('.filter-container');
-//         const elems = this.filterArr.map(item => this._renderCategory(item))
-//         container.innerHTML = '';
-//         container.append(...elems);
-//     }
-//
-//     _renderCategory(item) {
-//         const container = cElem('div', 'shop-item');
-//         const title = cElem('div', 'filter-header-title');
-//         title.innerHTML = `
-//                    <span>${item.title}</span>
-//                    <div class="arrow"></div>
-//         `;
-//         title.onclick = function () {
-//             this.classList.toggle('filter-header-title--active');
-//             const content = this.parentElement.children[1];
-//             content.classList.toggle('filter-header-title--active');
-//         }
-//
-//         const content = cElem('div', 'filter-header-title');
-//         // Get method that render content
-//         const getContent = this.contentRenderMethods[item.type];
-//         // render content
-//         const filterContent = getContent(item)
-//         /// Render content into parent block
-//         content.append(...filterContent)
-//         container.append(title, content);
-//         return container;
-//     }
-//
-//     _renderContentCheck(item) {
-//         return item.variants.map(variant => {
-//             const label = cElem('label')
-//             const title = cElem('span', null, variant)
-//             const inp = cElem('input')
-//             inp.type = 'checkbox'
-//             inp.oninput = (e) => {
-//                 this.changeColor(variant)
-//             }
-//             label.append(inp, title)
-//             return label;
-//         })
-//     }
-//
-//     _renderContentRange(item) {
-//         const containerFrom = cElem('div');
-//         const labelFrom = cElem('label');
-//         labelFrom.innerText = 'From'
-//         const inputFrom = cElem('input');
-//         inputFrom.value = item.variant.from
-//
-//         inputFrom.oninput = (e) => {
-//             const elem = e.target;
-//             this.changePrice('from', elem.value);
-//         }
-//
-//         containerFrom.append(labelFrom, inputFrom)
-//
-//         const containerTo = cElem('div');
-//         const labelTO = cElem('label');
-//         labelTO.innerText = 'To'
-//         const inputTo = cElem('input');
-//         inputTo.value = item.variant.to
-//         inputTo.oninput = (e) => {
-//             const value = e.target.value;
-//             this.changePrice('to', value);
-//         }
-//         containerTo.append(labelTO, inputTo)
-//
-//         return [containerFrom, containerTo]
-//     }
-// }
-//
-// const renderFilter = new RenderFilter();
-
