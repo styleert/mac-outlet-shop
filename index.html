@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <title>MacOutlet</title>
+</head>
+<body class="body">
+    <div class="wrapper">
+        <header class="header">
+            <div class="logo"><img src="img/icons/image 1.svg" alt="alt"></div>
+            <div id="showCartItems" class="basket cart-logo"><img src="img/icons/cart.svg" alt="alt"></div>
+        </header>
+    </div>
+    <div class="wrapper">
+        <main>
+        <!-- <div class="wrapper">
+            <div id="shopping-cart" class="shopping-cart">
+                <div id="shopping-cart-header" class="shopping-cart-header"><h2>Shopping Cart</h2><h3>Checkout is almost done!</h3></div>
+                <div id="shopping-cart-cnt" class="shopping-cart-cnt"></div>
+                <div id="shoping-cart-footer" class="shoping-cart-footer"><button type="button" id="hideContent">Buy</button></div>
+            </div>
+        </div> -->
+        <div class="wrapper">
+            <div class="cart">
+                <div class="cart_info">some info</div>
+                <div class="cart_items">
+                    <div class="cart_item">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider">
+              <div class="slider-item" style="background-image: url(img/banners/ipad_air_banner.jpg);">
+                <div class="slider-header-cnt flex-column-center">
+                    <h1 class="slider-header">IPad Air</h1>
+                    <button class="button">Add to cart</button>
+                </div></div>
+                <div class="slider-item" style="background-image: url(img/banners/airpods_pro_banner.png);">
+                    <div class="slider-header-cnt flex-column-center">
+                        <h1 class="slider-header">AirPods Pro</h1>
+                        <button id="card__btn" class="button">Add to cart</button>
+                    </div></div>
+              <div class="slider-item" style="background-image: url(img/banners/watch_banner.jpg)">
+                <div class="slider-header-cnt flex-column-center">
+                    <h1 class="slider-header" style="color:#f54e42;">Apple Watch 4</h1>
+                    <button class="button">Add to cart</button>
+                </div></div>
+              <div class="slider-item" style="background-image: url(img/banners/iphone_12_banner.jpg);">
+                <div class="slider-header-cnt flex-column-center">
+                    <button class="button">Add to cart</button>
+                </div></div>
+              <div class="slider-item" style="background-image: url(img/banners/mac_book_banner.jpg);">
+                <div class="slider-header-cnt flex-column-center">
+                    <h1 class="slider-header">MacBook Pro 16</h1>
+                    <button class="button">Add to cart</button>
+                </div></div>
+              <div class="slider-item" style="background-image: url(img/banners/apple_tv_banner.png);">
+                <div class="slider-header-cnt flex-column-center">
+                    <h1 class="slider-header" style="color: black;">Apple TV</h1>
+                    <button class="button">Add to cart</button>
+                </div></div>
+        </div>
+        <div class="search-bar-cnt">
+            <input class="search-bar" type="text" placeholder="Enter device name" />
+            <div class="searchbar-btn-cnt">
+              <button class="searchbar-btn filter-btn"></button>
+              <button class="searchbar-btn settings-btn"></button>
+            </div>
+          </div>
+        <div class="shop-cnt">
+            <!-- FILTER MENU -->
+            <div class="filter-menu filter-container">
+                <div class="shop-item filter-cnt">
+                    <div id="price-header-item" class="filter-header">
+                        <span class="filter-header-title">Price</span>
+                        <div class="filter-expand-icon" onclick="collapseOnClick('price-filter-item', 'price-header-item')"></div>
+                    </div>
+                    <div id="price-filter-item" class="filter-header filter-content">
+                        <div class="filter-item">
+                            <label class="filter-header-title filter-input-label">From</label>
+                            <input id="from-range-filter" class="filter-input" type="text" onchange="inputOnChange('from', this)" value="179">
+                        </div>
+                        <div class="filter-item">
+                            <label class="filter-header-title filter-input-label">To</label>
+                            <input id="to-range-filter" class="filter-input" type="text" onchange="inputOnChange('to', this)" value="2799">
+                        </div>
+                    </div>
+
+                    <!-- COLOR SECTION -->
+                    <div id="color-header-item" class="filter-header">
+                        <span class="filter-header-title">Color</span>
+                        <div class="filter-expand-icon" onclick="collapseOnClick('color-filter-item', 'color-header-item')"></div>
+                    </div>
+                    <div id="color-filter-item" class="filter-header filter-content">
+                        <ul class="two-col-list filter-list">
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Red">
+                                    <label class="filter-header-title filter-input-label">Red</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Black">
+                                    <label class="filter-header-title filter-input-label">Black</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Blue">
+                                    <label class="filter-header-title filter-input-label">Blue</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Gold">
+                                    <label class="filter-header-title filter-input-label">Gold</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Green">
+                                    <label class="filter-header-title filter-input-label">Green</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="White">
+                                    <label class="filter-header-title filter-input-label">White</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Grey">
+                                    <label class="filter-header-title filter-input-label">Grey</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('color', this)" value="Yellow">
+                                    <label class="filter-header-title filter-input-label">Yellow</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- MEMORY SECTION -->
+                    <div id="memory-header-item" class="filter-header">
+                        <span class="filter-header-title">Memory</span>
+                        <div class="filter-expand-icon" onclick="collapseOnClick('memory-filter-item', 'memory-header-item')"></div>
+                    </div>
+                    <div id="memory-filter-item" class="filter-header filter-content">
+                        <ul class="two-col-list filter-list">
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="memoryCheckboxOnClick(this)" value="32">
+                                    <label class="filter-header-title filter-input-label">32gb</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="memoryCheckboxOnClick(this)" value="64">
+                                    <label class="filter-header-title filter-input-label">64gb</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="memoryCheckboxOnClick(this)" value="128">
+                                    <label class="filter-header-title filter-input-label">128gb</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="memoryCheckboxOnClick(this)" value="256">
+                                    <label class="filter-header-title filter-input-label">256gb</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="memoryCheckboxOnClick(this)" value="512">
+                                    <label class="filter-header-title filter-input-label">512gb</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="memoryCheckboxOnClick(this)" value="1000">
+                                    <label class="filter-header-title filter-input-label">1TB</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="memoryCheckboxOnClick(this)" value="2000">
+                                    <label class="filter-header-title filter-input-label">2TB</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="memoryCheckboxOnClick(this)" value="4000">
+                                    <label class="filter-header-title filter-input-label">4TB</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- OS SECTION -->
+                    <div id="os-header-item" class="filter-header">
+                        <span class="filter-header-title">OS</span>
+                        <div class="filter-expand-icon" onclick="collapseOnClick('os-filter-item', 'os-header-item')"></div>
+                    </div>
+                    <div id="os-filter-item" class="filter-header filter-content">
+                        <ul class="filter-list">
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('os', this)" value="IOS">
+                                    <label class="filter-header-title filter-input-label">IOS</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('os', this)" value="macOS">
+                                    <label class="filter-header-title filter-input-label">Mac OS</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onchange="checkboxOnChange('os', this)" value="tvOS">
+                                    <label class="filter-header-title filter-input-label">tv OS</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input id="watch-os" class="filter-input filter-checkbox" type="checkbox"  onchange="checkboxOnChange('os', this)" value="watchOS">
+                                    <label class="filter-header-title filter-input-label">Watch OS</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <!-- DISPLAY SECTION -->
+                    <div id="display-header-item" class="filter-header">
+                        <span class="filter-header-title">Display</span>
+                        <div class="filter-expand-icon" onclick="collapseOnClick('display-filter-item', 'display-header-item')"></div>
+                    </div>
+                    <div id="display-filter-item" class="filter-header filter-content" style="border-bottom: none">
+                        <ul class="filter-list">
+                            <li>
+                                <div class="filter-item">
+                                    <input id="d1" class="filter-input filter-checkbox" type="checkbox" onclick="displayCheckboxOnClick(this)" value="2,5">
+                                    <label class="filter-header-title filter-input-label">2 - 5 inch</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onclick="displayCheckboxOnClick(this)" value="5,7">
+                                    <label class="filter-header-title filter-input-label">5 - 7 inch</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onclick="displayCheckboxOnClick(this)" value="7,12" >
+                                    <label class="filter-header-title filter-input-label">7 - 12 inch</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onclick="displayCheckboxOnClick(this)" value="12,16">
+                                    <label class="filter-header-title filter-input-label">12 - 16 inch</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="filter-item">
+                                    <input class="filter-input filter-checkbox" type="checkbox" onclick="displayCheckboxOnClick(this)" value="16,">
+                                    <label class="filter-header-title filter-input-label">+16 inch</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="shop-grid-cnt" class="shop-grid-cnt"></div>
+        </div>
+        <div id="pop-up" class="pop-up-cnt">
+            <div class="pop-up-bg" onclick="hideItemPopUp()">
+            </div>
+            <div class="pop-up-card wrapper">
+                <div class="pop-up-card-section pop-up-flex-section">
+                    <img id="pop-up-img" src="./img/items/apple-tv.jpeg" alt="" class="pop-up-image">
+                </div>
+                <div class="pop-up-card-section pop-up-description-cnt">
+                    <h5 id="pop-up-prod-title" class="shop-item-title shop-item-cnt">Apple TV Gen. 4 2020</h5>
+                    <div class="item-stat flex-column-center pop-up-description">
+                        <div class="stat-wrapper stat-wrapper-left">
+                            <span id="pop-up-prod-reviews" class="shop-item-cnt"><b>77%</b> Positive reviews</span>
+                            <span>Above avarage</span>
+                        </div>
+                        <div class="stat-wrapper stat-wrapper-right">
+                            <span id="pop-up-prod-orders" class="shop-item-cnt"><b>527</b></span>
+                            <span>orders</span>
+                        </div>
+                    </div>
+                    <ul id="pop-up-prod-list">
+                        <li class="pop-up-item-description">
+                            <span  class="pop-up-item-title">Color: </span>
+                            <span id="pop-up-prod-color" class="pop-up-item-value"></span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Operating system:</span>
+                            <span id="pop-up-prod-os" class="pop-up-item-value"></span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Chip:</span>
+                            <span id="pop-up-prod-chip" class="pop-up-item-value"></span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Height:</span>
+                            <span id="pop-up-prod-height" class="pop-up-item-value"></span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Width:</span>
+                            <span id="pop-up-prod-width" class="pop-up-item-value"></span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Weight:</span>
+                            <span id="pop-up-prod-weight" class="pop-up-item-value"></span>
+                        </li>
+                        <li class="pop-up-item-description">
+                            <span class="pop-up-item-title">Depth:</span>
+                            <span id="pop-up-prod-depth" class="pop-up-item-value"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pop-up-card-section pop-up-flex-section" style="flex-direction: column;">
+                    <span id="pop-up-prod-price" class="pop-up-card-price">$999,45</span>
+                    <span id="pop-up-prod-stock"  class="pop-up-stock">Stock: <b>45</b>pcs.</span>
+                    <button class="button" onclick="addToCart()">Add to cart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/items.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+
+
